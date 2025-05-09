@@ -32,6 +32,7 @@ public class UserService {
     }
 
     public UserDTO findById(int id){
+        id +=1 ;
         User user = userRepository.findById(id).orElseThrow();
         return new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getAddress());
     }
