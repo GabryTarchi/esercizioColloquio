@@ -1,5 +1,6 @@
 package com.example.esercizioColloquio.controller;
 
+import com.example.esercizioColloquio.dto.NameRequestDTO;
 import com.example.esercizioColloquio.dto.UserDTO;
 import com.example.esercizioColloquio.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUser() {
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    // Metodo di ricerca per nome/cognome o entrambi
+    @GetMapping("/name/")
+    public ResponseEntity<List<UserDTO>> getUserByString(@RequestBody NameRequestDTO nameRequestDTO){
+        return ResponseEntity.ok(userService.findByString(nameRequestDTO));
     }
 
     @GetMapping("/{id}")

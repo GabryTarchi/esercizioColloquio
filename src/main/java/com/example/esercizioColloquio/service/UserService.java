@@ -1,5 +1,6 @@
 package com.example.esercizioColloquio.service;
 
+import com.example.esercizioColloquio.dto.NameRequestDTO;
 import com.example.esercizioColloquio.dto.UserDTO;
 import com.example.esercizioColloquio.entity.User;
 import com.example.esercizioColloquio.exception.UserListEmptyException;
@@ -42,6 +43,21 @@ public class UserService {
         int effectiveId = id + 1;
         User user = userRepository.findById(effectiveId).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         return new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getAddress());
+    }
+
+    public List<UserDTO> findByString(NameRequestDTO request){
+        List<User> allUser = userRepository.findAll();
+        List<UserDTO> response = new ArrayList<>();
+
+        for(User user : allUser){
+            if(user.getName().equals(request.name()) || user.getSurname().equals(request.surname()) || (user.getName().equals(request.name()) && user.getSurname().equals(request.surname()))){
+                response.add(new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getAddress()));
+            }
+        }
+        if(response.isEmpty()){
+            throw new UserNotFoundException("Impossibile trovare gli utenti cercati");
+        }
+        return response;
     }
 
     public UserDTO create(UserDTO request){
