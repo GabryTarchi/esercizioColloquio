@@ -40,8 +40,7 @@ public class UserService {
     }
 
     public UserDTO findById(int id){
-        int effectiveId = id + 1;
-        User user = userRepository.findById(effectiveId).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         return new UserDTO(user.getId(), user.getName(), user.getSurname(), user.getEmail(), user.getAddress());
     }
 
@@ -100,8 +99,7 @@ public class UserService {
     }
 
     public void delete(int id){
-        int effectiveId = id + 1;
-        if(userRepository.existsById(effectiveId)){
+        if(userRepository.existsById(id)){
             throw new UserNotFoundException("User not found with id: " + id);
         }
         userRepository.deleteById(id);
