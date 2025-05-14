@@ -5,6 +5,8 @@ import com.example.esercizioColloquio.dto.UserDTO;
 import com.example.esercizioColloquio.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 @RestController
@@ -37,6 +39,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
         return ResponseEntity.ok(userService.create(userDTO));
+    }
+
+    @PostMapping("/csv")
+    public ResponseEntity<List<UserDTO>> createByCsv(@RequestParam("file")MultipartFile file){
+        return ResponseEntity.ok(userService.createFromCSV(file));
     }
 
     @PutMapping("/{id}")

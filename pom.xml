@@ -65,6 +65,13 @@
 			<artifactId>hibernate-community-dialects</artifactId>
 		</dependency>
 
+		<!-- OpenCSV to read CSV files -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.11</version>
+		</dependency>
+
 
 	</dependencies>
 
