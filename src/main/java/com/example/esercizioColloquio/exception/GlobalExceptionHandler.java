@@ -48,4 +48,16 @@ public class GlobalExceptionHandler {
                 request.getRequestURI());
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(RequestEmptyException.class)
+    public ResponseEntity<ErrorResponse> handleRequestEmptyException(
+            RequestEmptyException ex,
+            HttpServletRequest request) {
+        ErrorResponse error = new ErrorResponse(
+                ex.getMessage(),
+                "REQUEST_EMPTY",
+                LocalDateTime.now(),
+                request.getRequestURI());
+        return new ResponseEntity<>(error, HttpStatus.NO_CONTENT);
+    }
 }

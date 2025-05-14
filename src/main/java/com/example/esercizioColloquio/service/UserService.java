@@ -3,6 +3,7 @@ package com.example.esercizioColloquio.service;
 import com.example.esercizioColloquio.dto.NameRequestDTO;
 import com.example.esercizioColloquio.dto.UserDTO;
 import com.example.esercizioColloquio.entity.User;
+import com.example.esercizioColloquio.exception.RequestEmptyException;
 import com.example.esercizioColloquio.exception.UserListEmptyException;
 import com.example.esercizioColloquio.exception.UserNotFoundException;
 import com.example.esercizioColloquio.exception.UserValidationException;
@@ -47,6 +48,9 @@ public class UserService {
     public List<UserDTO> findByString(NameRequestDTO request){
         List<User> allUser = userRepository.findAll();
         List<UserDTO> response = new ArrayList<>();
+        if(request == null){
+            throw new RequestEmptyException("La richiesta è nulla");
+        }
 
         for(User user : allUser){
             if(user.getName().equals(request.name()) || user.getSurname().equals(request.surname()) || (user.getName().equals(request.name()) && user.getSurname().equals(request.surname()))){
@@ -99,7 +103,7 @@ public class UserService {
     }
 
     public void delete(int id){
-        if(userRepository.existsById(id)){
+        if(!userRepository.existsById(id)){
             throw new UserNotFoundException("User not found with id: " + id);
         }
         userRepository.deleteById(id);
