@@ -24,8 +24,8 @@ public class UserController {
     }
 
     // Metodo di ricerca per nome/cognome o entrambi
-    @GetMapping("/name/")
-    public ResponseEntity<List<UserDTO>> getUserByString(@RequestBody NameRequestDTO nameRequestDTO){
+    @GetMapping("/search")
+    public ResponseEntity<List<UserDTO>> searchUser(@RequestBody NameRequestDTO nameRequestDTO){
         return ResponseEntity.ok(userService.findByString(nameRequestDTO));
     }
 
