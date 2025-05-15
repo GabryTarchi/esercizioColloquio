@@ -27,13 +27,15 @@ L'entità `User` è composta dai seguenti campi:
 ### Endpoints REST
 
 | Metodo | Endpoint        | Descrizione                     |
-|--------|------------------|---------------------------------|
-| GET    | `/users`         | Restituisce tutti gli utenti    |
-| GET    | `/users/{id}`    | Restituisce un utente per ID    |
-| POST   | `/users`         | Crea un nuovo utente            |
-| PUT    | `/users/{id}`    | Aggiorna un utente esistente    |
-| DELETE | `/users/{id}`    | Elimina un utente               |
-| GET    | `/users/search`  | Ricerca utenti per nome/cognome |
+|--------|-----------------|---------------------------------|
+| GET    | `/users`        | Restituisce tutti gli utenti    |
+| GET    | `/users/{id}`   | Restituisce un utente per ID    |
+| POST   | `/users`        | Crea un nuovo utente            |
+| PUT    | `/users/{id}`   | Aggiorna un utente esistente    |
+| DELETE | `/users/{id}`   | Elimina un utente               |
+| GET    | `/users/search` | Ricerca utenti per nome/cognome |
+| POST   | `/users/csv`    | Caricamento utenti da file csv  |
+
 
 #### Esempio ricerca
 
